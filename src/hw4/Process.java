@@ -22,8 +22,8 @@ public class Process {
 			int size = makeSize();
 			if (pid == 1) {
 				p.put("arrivalTime", 0);
-				p.put("burstTime", burstTime);
-				p.put("size", size);
+				p.put("burstTime", burstTime);	// Burst time is generated to be 1, 2, 3, 4, or 5 seconds randomly and uniformly
+				p.put("size", size);			// Size is generated to be 4, 8, 16, or 32 MB randomly and uniformly
 				p.put("pid", pid++);
 				p.put("completed", 0);
 				
@@ -61,10 +61,12 @@ public class Process {
 	}
 	
 	private static int makeSize() {
+		int minimum = 0;
+		int maximum = 4;
 		int mem_sizes[] = { 4, 8, 16, 32 };
-		int i = (int) (Math.random() * 4) + 1;
+		int randomNum = minimum + (int)(Math.random()*maximum); 
 		
-		return mem_sizes[i];
+		return mem_sizes[randomNum];
 	}
 	
 	private static boolean isFilled(List<HashMap<String, Number>> pList) {
@@ -76,14 +78,6 @@ public class Process {
 		return true;
 	}
 	
-	public static void printList(List<HashMap<String, Number>> pl) {
-		for (int i = 0; i < pl.size(); i++) {
-			System.out.print("pid: "+pl.get(i).get("pid")+"\t");
-			System.out.print("Arrival Time: "+pl.get(i).get("arrivalTime")+"\t");
-			System.out.print("Run Time: "+pl.get(i).get("burstTime")+"\t");
-			System.out.println("Priority: "+pl.get(i).get("priority"));
-		}
-		System.out.println();
-	}
+
 	
 }

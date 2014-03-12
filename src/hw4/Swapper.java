@@ -11,7 +11,7 @@ public class Swapper {
 		cpu = new Process();	
 	}
 	
-	public static int[] fcfs() {
+	public int[] fcfs() {
 		List<HashMap<String, Number>> processLists = cpu.processes;
 		printList(processLists);
 		HashMap<String, Number> currentProcess = null;
@@ -52,10 +52,13 @@ public class Swapper {
 	
 	public static void printList(List<HashMap<String, Number>> pl) {
 		for (int i = 0; i < pl.size(); i++) {
+			Number n =  pl.get(i).get("arrivalTime");
+			double arrivalTime = n.doubleValue();
 			System.out.print("pid: "+pl.get(i).get("pid")+"\t");
-			System.out.print("Arrival Time: "+pl.get(i).get("arrivalTime")+"\t");
+			System.out.format("Arrival Time: %.2f\t", arrivalTime);
 			System.out.print("Run Time: "+pl.get(i).get("burstTime")+"\t");
-			System.out.println("Priority: "+pl.get(i).get("priority"));
+			System.out.println("Size: " + pl.get(i).get("size") + " MB");
+
 		}
 		System.out.println();
 	}
@@ -82,6 +85,12 @@ public class Swapper {
 	// Run each algorithm 5 times simulating 1 minute each time to get an avg of the # of processes 
 	// successfully swapped into memory
 	
+	
+	public static void main(String[] args)
+	{
+		Swapper test = new Swapper();
+		int aTest[] = test.fcfs();
+	}
 	
 	
 }
